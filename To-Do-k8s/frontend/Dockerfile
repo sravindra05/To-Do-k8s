@@ -5,11 +5,13 @@ FROM node:alpine as build
 WORKDIR /app
 # copy everything to /app directory
 # as opposed to on dev, in prod everything is copied to docker
-COPY . /app
+COPY . .
 
-RUN yarn
+
 #build the project for production
-RUN yarn build
+RUN npm install
+
+RUN npm run build
 # set up production environment
 # the base image for this is an alpine based nginx image
 FROM nginx:alpine

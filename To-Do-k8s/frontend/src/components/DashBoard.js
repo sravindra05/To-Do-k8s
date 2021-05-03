@@ -15,7 +15,7 @@ function genTaskCard(title,description,id){
   button_element.setAttribute("id",id)
   button_element.addEventListener("click",(e)=>{
     console.log(e.target.id)
-    fetch('http://localhost:8000/api/users/me/tasks/'+e.currentTarget.id, {
+    fetch('http://localhost/api/users/me/tasks/'+e.currentTarget.id, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -51,7 +51,7 @@ function genTaskCard(title,description,id){
 class DashBoard extends React.Component {
   componentDidMount() {
     function getTasks(){
-      fetch('http://localhost:8000/api/users/me/tasks', {
+      fetch('http://localhost/api/users/me/tasks', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -87,7 +87,7 @@ class DashBoard extends React.Component {
         alert("Please fill all fields");
         return
       }
-      fetch('http://localhost:8000/api/users/me/tasks', {
+      fetch('http://localhost/api/users/me/tasks', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

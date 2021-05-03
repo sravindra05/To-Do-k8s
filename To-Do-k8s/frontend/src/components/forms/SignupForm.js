@@ -17,7 +17,7 @@ class SignUpForm extends React.Component {
       'username': username,
       'password': password,
     };
-  fetch('http://localhost:8000/api/signup', {
+  fetch('http://localhost/api/signup', {
     method: 'POST',
     headers: {
       'Content-Type': "application/json",

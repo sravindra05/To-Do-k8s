@@ -5,6 +5,8 @@ services:
         build: 
             context: ./backend/
             dockerfile: Dockerfile
+        links:
+            - db
         restart: always
     nginx:
         depends_on: 
@@ -16,3 +18,9 @@ services:
         ports: 
             - "80:80"
         restart: always
+    db:
+        image: mongo:latest
+        hostname: mongo_db
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=root 
+            - MONGO_INITDB_ROOT_PASSWORD=pass

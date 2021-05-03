@@ -16,7 +16,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 #MONGO_URL=os.environ["MONGO_URL"]
-myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+myclient = pymongo.MongoClient(host="mongo_db",port=27017,username="root",password="pass",authSource="admin")
 mydb = myclient["UserDB"]
 user_collection = mydb["user"]
 todo_collection = mydb["todo"]

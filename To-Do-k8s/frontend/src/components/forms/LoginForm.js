@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
         }
         formBody = formBody.join("&");
         
-        fetch('http://localhost:8000/api/token', {
+        fetch('http://localhost/api/token', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
