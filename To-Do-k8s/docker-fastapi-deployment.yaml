@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: docker-fastapi
+  name: docker-fastapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: docker-fastapi
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: docker-fastapi
+    spec:
+      containers:
+        - env:
+            - name: MONGO_HOST
+              value: mongodb
+            - name: MONGO_PASSWORD
+              value: pass
+            - name: MONGO_PORT
+              value: "27107"
+            - name: MONGO_USERNAME
+              value: root
+          image: docker-fastapi
+          name: docker-fastapi
+          resources: {}
+      restartPolicy: Always
+status: {}

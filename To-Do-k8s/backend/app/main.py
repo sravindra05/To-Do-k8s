@@ -1,6 +1,7 @@
 from typing import Optional
 from datetime import timedelta,datetime
 import uuid
+import os
 
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -15,8 +16,11 @@ SECRET_KEY = "8346dc9f9086ea4f70a6f0b8192f435b9ce4fbde121a9816cbe04330a239fb9c"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-#MONGO_URL=os.environ["MONGO_URL"]
-myclient = pymongo.MongoClient(host="mongo_db",port=27017,username="root",password="pass",authSource="admin")
+MONGO_HOST=os.environ["MONGO_HOST"]
+MONGO_PORT=os.environ["MONGO_PORT"]
+MONGO_USERNAME=os.environ["MONGO_USERNAME"]
+MONGO_PASSWORD=os.environ["MONGO_PASSWORD"]
+myclient = pymongo.MongoClient(host=MONGO_HOST,port=int(MONGO_PORT),username=MONGO_USERNAME,password=MONGO_PASSWORD,authSource="admin")
 mydb = myclient["UserDB"]
 user_collection = mydb["user"]
 todo_collection = mydb["todo"]
@@ -24,7 +28,7 @@ todo_collection = mydb["todo"]
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*','http://localhost:3000'],
+    allow_origins=['*'],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

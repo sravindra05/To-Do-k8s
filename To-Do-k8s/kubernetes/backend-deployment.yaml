@@ -1,0 +1,33 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-deployment
+  labels:
+    app: fastapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-pod
+  template:
+    metadata:
+      name: fastapi-pod
+      labels:
+        app: fastapi-pod
+    spec:
+        containers:
+          - name: docker-fastapi
+            image: backend
+            env: 
+            - name: MONGO_USERNAME
+              value: root
+            - name: MONGO_PORT
+              value: "27017"
+            - name: MONGO_HOST
+              value: mongo-service
+            - name: MONGO_PASSWORD
+              value: pass
+            imagePullPolicy: Never
+            ports:
+              - containerPort: 8000
